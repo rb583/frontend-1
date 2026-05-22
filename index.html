@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title id="pageTitle">Portfolio</title>
+   <link rel="stylesheet" href="style.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap"
+   rel="stylesheet"/>
+</head> rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo" id="navLogo">...</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p class="hero-tag">Hello, I'm</p>
+      <h1 class="hero-name" id="heroName">
+        <span class="skeleton sk-line sk-wide"></span>
+      </h1>
+      <p class="hero-role" id="heroRole">
+        <span class="skeleton sk-line sk-mid"></span>
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="blob"></div>
+      <div class="avatar-box">
+        <img id="heroAvatar"
+             src="https://api.dicebear.com/7.x/notionists/svg?seed=portfolio"
+             alt="avatar" class="avatar"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="section-title">About <span class="accent">Me</span></h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p id="aboutBio"><span class="skeleton sk-line sk-full"></span></p>
+          <div class="about-stats" id="aboutStats"></div>
+        </div>
+        <div class="about-card" id="aboutCard">
+          <div class="skeleton sk-line sk-full"></div>
+          <div class="skeleton sk-line sk-mid"></div>
+          <div class="skeleton sk-line sk-wide"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section section-dark" id="skills">
+    <div class="container">
+      <h2 class="section-title">My <span class="accent">Skills</span></h2>
+      <div class="skills-grid" id="skillsGrid"></div>
+      <div class="skill-bars" id="skillBars"></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title">My <span class="accent">Projects</span></h2>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-dark" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <p id="contactTagline"><span class="skeleton sk-line sk-full"></span></p>
+          <div class="contact-items" id="contactItems">
+            <div class="contact-skeleton"></div>
+            <div class="contact-skeleton"></div>
+            <div class="contact-skeleton"></div>
+            <div class="contact-skeleton"></div>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+          <p id="formStatus" class="form-status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Built with ❤️ by <span class="accent" id="footerName">...</span> · Hosted on Render</p>
+    <p>&copy; Rashid Nuhu Busazi. 2026</p>
+  </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

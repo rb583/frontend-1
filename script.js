@@ -10,7 +10,9 @@ const SKILL_LEVELS = {
 };
 
 // ── Detect current page ──────────────────────────────────────
-const PAGE = window.location.pathname.split("/").pop() || "index.html";
+// Detect page — inafanya kazi na /profile.html na /profile
+const _raw = window.location.pathname.split("/").pop();
+const PAGE = !_raw ? "index.html" : _raw.includes(".") ? _raw : _raw + ".html";
 
 // ── Sidebar ──────────────────────────────────────────────────
 function openSidebar() {

@@ -44,8 +44,7 @@ async function loadAbout() {
       `${d.name.split(" ")[0]} <br/>
        <span class="accent">${d.name.split(" ").slice(1).join(" ")}</span>`;
     document.getElementById("heroRole").textContent = d.title;
-    document.getElementById("heroAvatar").src =
-      `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(d.name)}`;
+    document.getElementById("heroAvatar").src = `${API_BASE}${d.photo}`;
 
     // About bio
     document.getElementById("aboutBio").textContent = d.bio;

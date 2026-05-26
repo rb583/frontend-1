@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+    <nav class="sidebar-nav">
+      <a href="index.html"    class="sidebar-link"><span class="sidebar-icon">🏠</span> Home</a>
+      <a href="profile.html"  class="sidebar-link"><span class="sidebar-icon">👤</span> My Profile</a>
+      <a href="skills.html"   class="sidebar-link"><span class="sidebar-icon">⌨️</span> Skills</a>
+      <a href="projects.html" class="sidebar-link active"><span class="sidebar-icon">🚀</span> Projects</a>
+      <a href="contact.html"  class="sidebar-link"><span class="sidebar-icon">📧</span> Contact</a>
+    </nav>
+  </div>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo" id="navLogo">...</a>
+    <button class="menu-btn" onclick="openSidebar()">☰</button>
+  </nav>
+
+  <main class="page-content">
+    <h2 class="page-title">My <span class="accent">Projects</span></h2>
+    <div class="projects-grid" id="projectsGrid">
+      <div class="project-card"><div class="project-img"><div class="skeleton" style="width:80px;height:80px;border-radius:50%"></div></div><div class="project-info"><div class="skeleton sk-line sk-wide" style="margin-bottom:.6rem"></div><div class="skeleton sk-line sk-full"></div></div></div>
+      <div class="project-card"><div class="project-img"><div class="skeleton" style="width:80px;height:80px;border-radius:50%"></div></div><div class="project-info"><div class="skeleton sk-line sk-wide" style="margin-bottom:.6rem"></div><div class="skeleton sk-line sk-full"></div></div></div>
+      <div class="project-card"><div class="project-img"><div class="skeleton" style="width:80px;height:80px;border-radius:50%"></div></div><div class="project-info"><div class="skeleton sk-line sk-wide" style="margin-bottom:.6rem"></div><div class="skeleton sk-line sk-full"></div></div></div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

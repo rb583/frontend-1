@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title id="pageTitle">Portfolio</title>
+  <title>My Profile</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 </head>
@@ -16,7 +16,10 @@
   <div class="sidebar" id="sidebar">
     <button class="sidebar-close" onclick="closeSidebar()">✕</button>
     <nav class="sidebar-nav">
-      <a href="profile.html" class="sidebar-link">
+      <a href="index.html" class="sidebar-link">
+        <span class="sidebar-icon">🏠</span> Home
+      </a>
+      <a href="profile.html" class="sidebar-link active">
         <span class="sidebar-icon">👤</span> My Profile
       </a>
       <a href="skills.html" class="sidebar-link">
@@ -33,35 +36,46 @@
 
   <!-- TOP NAV -->
   <nav class="nav">
-    <div class="nav-logo" id="navLogo">...</div>
+    <a href="index.html" class="nav-logo" id="navLogo">...</a>
     <button class="menu-btn" onclick="openSidebar()">☰</button>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <p class="hero-tag">Hello, I'm</p>
-      <h1 class="hero-name" id="heroName">
-        <span class="skeleton sk-line sk-wide"></span>
-      </h1>
-      <p class="hero-role" id="heroRole">
-        <span class="skeleton sk-line sk-mid"></span>
-      </p>
-      <p class="hero-bio" id="heroBio"></p>
-      <div class="hero-btns">
-        <a href="projects.html" class="btn btn-primary">View Projects</a>
-        <a href="contact.html" class="btn btn-outline">Contact Me</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="blob"></div>
-      <div class="avatar-box">
-        <img id="heroAvatar"
+  <!-- PROFILE PAGE -->
+  <main class="page-content">
+    <h2 class="page-title">My <span class="accent">Profile</span></h2>
+
+    <div class="profile-wrapper">
+
+      <!-- Photo -->
+      <div class="profile-photo-box">
+        <img id="profilePhoto"
              src="https://api.dicebear.com/7.x/notionists/svg?seed=portfolio"
-             alt="avatar" class="avatar"/>
+             alt="Profile Photo" class="profile-photo"/>
+        <div class="profile-badge" id="profileBadge"></div>
       </div>
+
+      <!-- Info -->
+      <div class="profile-info">
+        <h2 id="profileName"><span class="skeleton sk-line sk-wide"></span></h2>
+        <p id="profileTitle" class="profile-title"></p>
+
+        <div class="profile-details" id="profileDetails">
+          <div class="skeleton sk-line sk-full"></div>
+          <div class="skeleton sk-line sk-mid"></div>
+          <div class="skeleton sk-line sk-wide"></div>
+        </div>
+
+        <p id="profileBio" class="profile-bio"></p>
+
+        <div class="profile-links" id="profileLinks"></div>
+
+        <a href="resume.pdf" class="btn btn-primary mt" download>
+          Download CV
+        </a>
+      </div>
+
     </div>
-  </section>
+  </main>
 
   <script src="script.js"></script>
 </body>

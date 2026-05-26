@@ -1,13 +1,17 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "style.css",  "use": "@vercel/static" },
-    { "src": "script.js",  "use": "@vercel/static" }
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.css",  "use": "@vercel/static" },
+    { "src": "*.js",   "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/style.css",  "dest": "/style.css" },
-    { "src": "/script.js",  "dest": "/script.js" },
-    { "src": "/(.*)",       "dest": "/index.html" }
+    { "src": "/style.css",    "dest": "/style.css" },
+    { "src": "/script.js",    "dest": "/script.js" },
+    { "src": "/profile",      "dest": "/profile.html" },
+    { "src": "/skills",       "dest": "/skills.html" },
+    { "src": "/projects",     "dest": "/projects.html" },
+    { "src": "/contact",      "dest": "/contact.html" },
+    { "src": "/(.*)",         "dest": "/index.html" }
   ]
 }

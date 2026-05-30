@@ -9,59 +9,155 @@
 </head>
 <body>
 
-  <!-- SIDEBAR OVERLAY -->
-  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
-
-  <!-- SIDEBAR -->
-  <div class="sidebar" id="sidebar">
-    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
-    <nav class="sidebar-nav">
-      <a href="profile.html" class="sidebar-link">
-        <span class="sidebar-icon">👤</span> My Profile
-      </a>
-      <a href="skills.html" class="sidebar-link">
-        <span class="sidebar-icon">⌨️</span> Skills
-      </a>
-      <a href="projects.html" class="sidebar-link">
-        <span class="sidebar-icon">🚀</span> Projects
-      </a>
-      <a href="contact.html" class="sidebar-link">
-        <span class="sidebar-icon">📧</span> Contact
-      </a>
-    </nav>
-  </div>
-
-  <!-- TOP NAV -->
-  <nav class="nav">
-    <div class="nav-logo" id="navLogo">...</div>
-    <button class="menu-btn" onclick="openSidebar()">☰</button>
+  <!-- NAV -->
+  <nav class="nav" id="navbar">
+    <a href="#home" class="nav-logo" id="navLogo">...</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">☰</button>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home"     onclick="closeMobileMenu()">Home</a>
+    <a href="#profile"  onclick="closeMobileMenu()">Profile</a>
+    <a href="#skills"   onclick="closeMobileMenu()">Skills</a>
+    <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+    <a href="#contact"  onclick="closeMobileMenu()">Contact</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
     <div class="hero-content">
       <p class="hero-tag">Hello, I'm</p>
       <h1 class="hero-name" id="heroName">
         <span class="skeleton sk-line sk-wide"></span>
       </h1>
-      <p class="hero-role" id="heroRole">
-        <span class="skeleton sk-line sk-mid"></span>
-      </p>
-      <p class="hero-bio" id="heroBio"></p>
+      <p class="hero-role" id="heroRole"></p>
+      <p class="hero-bio"  id="heroBio"></p>
       <div class="hero-btns">
-        <a href="projects.html" class="btn btn-primary">View Projects</a>
-        <a href="contact.html" class="btn btn-outline">Contact Me</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="blob"></div>
-      <div class="avatar-box">
-        <img id="heroAvatar"
-             src="https://api.dicebear.com/7.x/notionists/svg?seed=portfolio"
-             alt="avatar" class="avatar"/>
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact"  class="btn btn-outline">Contact Me</a>
       </div>
     </div>
   </section>
+
+  <!-- ═══════════════════════════════════════
+       PROFILE
+  ════════════════════════════════════════ -->
+  <section class="section" id="profile">
+    <div class="container">
+      <h2 class="section-title">My <span class="accent">Profile</span></h2>
+      <div class="profile-wrapper">
+
+        <div class="profile-photo-box">
+          <img id="profilePhoto"
+               src="https://api.dicebear.com/7.x/notionists/svg?seed=portfolio"
+               alt="Profile" class="profile-photo"/>
+          <div class="profile-badge" id="profileBadge"></div>
+        </div>
+
+        <div class="profile-info">
+          <h3 id="profileName"><span class="skeleton sk-line sk-wide"></span></h3>
+          <p  id="profileTitle" class="profile-title"></p>
+          <div class="profile-details" id="profileDetails">
+            <div class="skeleton sk-line sk-full"></div>
+            <div class="skeleton sk-line sk-mid"></div>
+            <div class="skeleton sk-line sk-wide"></div>
+          </div>
+          <p id="profileBio" class="profile-bio"></p>
+          <div class="profile-links" id="profileLinks"></div>
+          <a href="resume.pdf" class="btn btn-primary mt" download>⬇ Download CV</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SKILLS
+  ════════════════════════════════════════ -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <h2 class="section-title">My <span class="accent">Skills</span></h2>
+      <div class="skills-grid" id="skillsGrid">
+        <div class="skill-category"><div class="skeleton sk-line sk-mid" style="margin-bottom:1rem"></div><div class="skeleton sk-line sk-full"></div></div>
+        <div class="skill-category"><div class="skeleton sk-line sk-mid" style="margin-bottom:1rem"></div><div class="skeleton sk-line sk-full"></div></div>
+        <div class="skill-category"><div class="skeleton sk-line sk-mid" style="margin-bottom:1rem"></div><div class="skeleton sk-line sk-full"></div></div>
+        <div class="skill-category"><div class="skeleton sk-line sk-mid" style="margin-bottom:1rem"></div><div class="skeleton sk-line sk-full"></div></div>
+      </div>
+      <div class="skill-bars" id="skillBars"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PROJECTS
+  ════════════════════════════════════════ -->
+  <section class="section" id="projects">
+    <div class="container">
+      <h2 class="section-title">My <span class="accent">Projects</span></h2>
+      <div class="projects-grid" id="projectsGrid">
+        <div class="project-card"><div class="project-img"></div><div class="project-info"><div class="skeleton sk-line sk-wide" style="margin-bottom:.6rem"></div><div class="skeleton sk-line sk-full"></div></div></div>
+        <div class="project-card"><div class="project-img"></div><div class="project-info"><div class="skeleton sk-line sk-wide" style="margin-bottom:.6rem"></div><div class="skeleton sk-line sk-full"></div></div></div>
+        <div class="project-card"><div class="project-img"></div><div class="project-info"><div class="skeleton sk-line sk-wide" style="margin-bottom:.6rem"></div><div class="skeleton sk-line sk-full"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT
+  ════════════════════════════════════════ -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In <span class="accent">Touch</span></h2>
+      <div class="contact-wrapper">
+
+        <div class="contact-info">
+          <p id="contactTagline"><span class="skeleton sk-line sk-full"></span></p>
+          <div class="contact-items" id="contactItems">
+            <div class="contact-skeleton"></div>
+            <div class="contact-skeleton"></div>
+            <div class="contact-skeleton"></div>
+            <div class="contact-skeleton"></div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required/>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+          <p id="formStatus" class="form-status"></p>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; Built by <span class="accent" id="footerName">...</span> · Hosted on Vercel</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>

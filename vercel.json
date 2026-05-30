@@ -6,12 +6,6 @@
     { "src": "*.js",   "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/style.css",    "dest": "/style.css" },
-    { "src": "/script.js",    "dest": "/script.js" },
-    { "src": "/profile",      "dest": "/profile.html" },
-    { "src": "/skills",       "dest": "/skills.html" },
-    { "src": "/projects",     "dest": "/projects.html" },
-    { "src": "/contact",      "dest": "/contact.html" },
-    { "src": "/(.*)",         "dest": "/index.html" }
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }

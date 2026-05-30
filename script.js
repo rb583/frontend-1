@@ -105,6 +105,7 @@ async function loadAbout() {
     document.getElementById("contactItems").innerHTML = `
       <div class="contact-item"><span>📧</span><a href="mailto:${d.email}">${d.email}</a></div>
       <div class="contact-item"><span>📱</span><span>${d.phone}</span></div>
+      <div class="contact-item"><span>💬</span><a href="https://wa.me/${d.phone.replace(/\D/g,'')}" target="_blank" rel="noopener">WhatsApp</a></div>
       <div class="contact-item"><span>🔗</span><a href="${d.linkedin}" target="_blank" rel="noopener">${d.linkedin.replace("https://","")}</a></div>
       <div class="contact-item"><span>💻</span><a href="${d.github}"   target="_blank" rel="noopener">${d.github.replace("https://","")}</a></div>
     `;

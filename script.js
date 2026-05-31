@@ -2,13 +2,27 @@
 //  PORTFOLIO SCRIPT — Single Page
 // ============================================================
 
-const API_BASE = "https://backend-portfolio-3mhd.onrender.com"; // ← weka URL yako ya Render
+const API_BASE = "https://your-render-url.onrender.com"; // ← weka URL yako ya Render
 
 const SKILL_LEVELS = {
   "Python":85, "JavaScript":75, "HTML/CSS":80,
   "Cloud Platforms":70, "Databases":65,
 };
 
+
+// ── Safe DOM helpers ─────────────────────────────────────────
+function setEl(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+function setHTML(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+function setAttr(id, attr, value) {
+  const el = document.getElementById(id);
+  if (el) el[attr] = value;
+}
 // ══════════════════════════════════════════
 //  MOBILE MENU
 // ══════════════════════════════════════════
@@ -59,66 +73,60 @@ async function loadAbout() {
     const d = await apiFetch("/api/about");
 
     // Nav logo + page title
-    document.getElementById("navLogo").innerHTML =
-      `${d.name.split(" ")[0]}<span class="dot">.</span>`;
-    document.title = `${d.name} . portfolio`;
+    setHTML("navLogo", `${d.name.split(" ")[0]}<span class="dot">.</span>`);
+    document.title = `${d.name} · Portfolio`;
 
     // Hero
-    document.getElementById("heroName").innerHTML =
-  `${d.name.split(" ")[0]} ${d.name.split(" ")[1]} <br/><span class="accent">${d.name.split(" ").slice(2).join(" ")}</span>`;
-    document.getElementById("heroRole").textContent = d.title;
-    document.getElementById("heroBio").textContent  = d.bio;
+    setHTML("heroName", `${d.name.split(" ")[0]} ${d.name.split(" ")[1]}<br/><span class="accent">${d.name.split(" ").slice(2).join(" ")}</span>`);
+    setEl("heroRole", d.title);
+    setEl("heroBio", d.bio);
 
     // Profile photo
-    document.getElementById("profilePhoto").src = `${API_BASE}${d.photo}`;
+    setAttr("profilePhoto", "src", `${API_BASE}${d.photo}`);
 
     // Profile badge
-    document.getElementById("profileBadge").innerHTML = d.available
-      ? `<span class="badge-open">● Open to Work</span>`
-      : `<span class="badge-closed">● Not Available</span>`;
+    setHTML("profileBadge", d.available ? `<span class="badge-open">● Open to Work</span>` : `<span class="badge-closed">● Not Available</span>`);
 
     // Profile name & title
-    document.getElementById("profileName").textContent  = d.name;
-    document.getElementById("profileTitle").textContent = d.title;
+    setEl("profileName", d.name);
+    setEl("profileTitle", d.title);
 
     // Profile details
-    document.getElementById("profileDetails").innerHTML = `
+    setHTML("profileDetails", `
       <div class="info-row"><span>📍</span><span>${d.location}</span></div>
       <div class="info-row"><span>📧</span><span>${d.email}</span></div>
       <div class="info-row"><span>📱</span><span>${d.phone}</span></div>
     `;
 
     // Profile bio
-    document.getElementById("profileBio").textContent = d.bio;
+    setEl("profileBio", d.bio);
 
     // Profile social links
-    document.getElementById("profileLinks").innerHTML = `
+    setHTML("profileLinks", `
       <a href="${d.github}"   class="btn btn-outline btn-sm" target="_blank" rel="noopener">💻 GitHub</a>
       <a href="${d.linkedin}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">🔗 LinkedIn</a>
     `;
 
     // Contact info
-    document.getElementById("contactTagline").textContent = d.available
+    setEl("contactTagline", d.available
       ? "I'm currently open to new opportunities. Feel free to reach out!"
       : "I'm busy but feel free to reach out for future opportunities.";
 
-    document.getElementById("contactItems").innerHTML = `
+    setHTML("contactItems", `
       <div class="contact-item"><span>📧</span><a href="mailto:${d.email}">${d.email}</a></div>
       <div class="contact-item"><span>📱</span><span>${d.phone}</span></div>
-      <div class="contact-item"><span>💬</span><a href="https://wa.me/${d.phone.replace(/\D/g,'')}" target="_blank" rel="noopener">WhatsApp</a></div>
       <div class="contact-item"><span>🔗</span><a href="${d.linkedin}" target="_blank" rel="noopener">${d.linkedin.replace("https://","")}</a></div>
       <div class="contact-item"><span>💻</span><a href="${d.github}"   target="_blank" rel="noopener">${d.github.replace("https://","")}</a></div>
     `;
 
     // Footer
-    document.getElementById("footerName").textContent = d.name;
+    setEl("footerName", d.name);
 
   } catch (err) {
     console.error("loadAbout failed:", err);
-    document.getElementById("heroName").textContent = "Portfolio";
-    document.getElementById("contactTagline").textContent = "⚠️ Could not load info.";
-    document.getElementById("contactItems").innerHTML =
-      `<div class="contact-error">⚠️ Backend unreachable.</div>`;
+    setEl("heroName", "Portfolio");
+    setEl("contactTagline", "⚠️ Could not load info.");
+    setHTML("contactItems", `<div class="contact-error">⚠️ Backend unreachable.</div>`);
   }
 }
 

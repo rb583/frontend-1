@@ -61,11 +61,11 @@ async function loadAbout() {
     // Nav logo + page title
     document.getElementById("navLogo").innerHTML =
       `${d.name.split(" ")[0]}<span class="dot">.</span>`;
-    document.title = `${d.name}`;
+    document.title = `${d.name} . portfolio`;
 
     // Hero
     document.getElementById("heroName").innerHTML =
-      `${d.name.split(" ")[0]} <span class="accent">${d.name.split(" ").slice(1).join(" ")}</span>`;
+  `${d.name.split(" ")[0]} ${d.name.split(" ")[1]} <br/><span class="accent">${d.name.split(" ").slice(2).join(" ")}</span>`;
     document.getElementById("heroRole").textContent = d.title;
     document.getElementById("heroBio").textContent  = d.bio;
 

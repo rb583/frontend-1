@@ -96,7 +96,7 @@ async function loadAbout() {
       <div class="info-row"><span>📍</span><span>${d.location}</span></div>
       <div class="info-row"><span>📧</span><span>${d.email}</span></div>
       <div class="info-row"><span>📱</span><span>${d.phone}</span></div>
-    `;
+    `);
 
     // Profile bio
     setEl("profileBio", d.bio);
@@ -105,19 +105,19 @@ async function loadAbout() {
     setHTML("profileLinks", `
       <a href="${d.github}"   class="btn btn-outline btn-sm" target="_blank" rel="noopener">💻 GitHub</a>
       <a href="${d.linkedin}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">🔗 LinkedIn</a>
-    `;
+    `);
 
     // Contact info
     setEl("contactTagline", d.available
       ? "I'm currently open to new opportunities. Feel free to reach out!"
-      : "I'm busy but feel free to reach out for future opportunities.";
+      : "I'm busy but feel free to reach out for future opportunities.");
 
     setHTML("contactItems", `
       <div class="contact-item"><span>📧</span><a href="mailto:${d.email}">${d.email}</a></div>
       <div class="contact-item"><span>📱</span><span>${d.phone}</span></div>
       <div class="contact-item"><span>🔗</span><a href="${d.linkedin}" target="_blank" rel="noopener">${d.linkedin.replace("https://","")}</a></div>
       <div class="contact-item"><span>💻</span><a href="${d.github}"   target="_blank" rel="noopener">${d.github.replace("https://","")}</a></div>
-    `;
+    `);
 
     // Footer
     setEl("footerName", d.name);

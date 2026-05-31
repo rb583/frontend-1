@@ -64,8 +64,8 @@ async function loadAbout() {
     document.title = `${d.name} · Portfolio`;
 
     // Hero
-    document.getElementById("heroName").innerHTML =
-      `${d.name.split(" ")[0]} <span class="accent">${d.name.split(" ").slice(1).join(" ")}</span>`;
+  document.getElementById("heroName").innerHTML =
+  `${d.name.split(" ")[0]} ${d.name.split(" ")[1]} <br/><span class="accent">${d.name.split(" ").slice(2).join(" ")}</span>`;
     document.getElementById("heroRole").textContent = d.title;
     document.getElementById("heroBio").textContent  = d.bio;
 

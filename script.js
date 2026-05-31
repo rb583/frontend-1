@@ -2,7 +2,7 @@
 //  PORTFOLIO SCRIPT — Single Page
 // ============================================================
 
-const API_BASE = "https://your-render-url.onrender.com"; // ← weka URL yako ya Render
+const API_BASE = "https://backend-portfolio-3mhd.onrender.com";
 
 const SKILL_LEVELS = {
   "Python":85, "JavaScript":75, "HTML/CSS":80,

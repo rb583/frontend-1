@@ -48,12 +48,12 @@ body::before {
   position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
     radial-gradient(ellipse 70% 50% at 10% 10%, rgba(79,195,247,0.1) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 90% 90%, rgba(200,149,108,0.08) 0%, transparent 60%);
+    radial-gradient(ellipse 50% 40% at 90% 90%, rgba(188,164,108,0.08) 0%, transparent 60%);
 }
 body::after {
   content:'';
   position:fixed; inset:0; z-index:0; pointer-events:none;
-  background-image: radial-gradient(circle, rgba(180,130,90,0.07) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(188,164,108,0.07) 1px, transparent 1px);
   background-size: 42px 42px;
 }
 
@@ -271,7 +271,7 @@ nav, section, footer { position:relative; z-index:1; }
 .profile-info  { display:flex; flex-direction:column; gap:1.5rem; }
 .profile-info h3 {
   font-size:1.8rem; line-height:1.2;
-  background:linear-gradient(135deg, #e8e0d8, var(--accent));
+  background:linear-gradient(135deg, #f0ead8, var(--accent));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   background-clip:text;
 }

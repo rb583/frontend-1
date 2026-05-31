@@ -1,5 +1,5 @@
 // ============================================================
-//  PORTFOLIO SCRIPT — Single Page
+//  PORTFOLIO SCRIPT — Multi Page
 // ============================================================
 
 const API_BASE = "https://backend-portfolio-3mhd.onrender.com";
@@ -8,7 +8,6 @@ const SKILL_LEVELS = {
   "Python":85, "JavaScript":75, "HTML/CSS":80,
   "Cloud Platforms":70, "Databases":65,
 };
-
 
 // ── Safe DOM helpers ─────────────────────────────────────────
 function setEl(id, value) {
@@ -23,38 +22,16 @@ function setAttr(id, attr, value) {
   const el = document.getElementById(id);
   if (el) el[attr] = value;
 }
-// ══════════════════════════════════════════
-//  MOBILE MENU
-// ══════════════════════════════════════════
-function toggleMobileMenu() {
+
+// ── Mobile menu ──────────────────────────────────────────────
+function toggleMenu() {
   document.getElementById("mobileMenu").classList.toggle("open");
 }
-function closeMobileMenu() {
+function closeMenu() {
   document.getElementById("mobileMenu").classList.remove("open");
 }
 
-// ══════════════════════════════════════════
-//  ACTIVE NAV on scroll
-// ══════════════════════════════════════════
-const sections = document.querySelectorAll("section[id]");
-const navLinks  = document.querySelectorAll(".nav-links a");
-
-window.addEventListener("scroll", () => {
-  const scrollY = window.scrollY + 100;
-  sections.forEach(section => {
-    const top = section.offsetTop;
-    const id  = section.getAttribute("id");
-    if (scrollY >= top && scrollY < top + section.offsetHeight) {
-      navLinks.forEach(l => l.classList.remove("active"));
-      const active = document.querySelector(`.nav-links a[href="#${id}"]`);
-      if (active) active.classList.add("active");
-    }
-  });
-});
-
-// ══════════════════════════════════════════
-//  HELPER
-// ══════════════════════════════════════════
+// ── API helper ───────────────────────────────────────────────
 async function apiFetch(endpoint) {
   const res = await fetch(`${API_BASE}${endpoint}`);
   if (!res.ok) throw new Error(`${endpoint} → HTTP ${res.status}`);
@@ -65,77 +42,81 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// ══════════════════════════════════════════
-//  1. LOAD ABOUT → Hero + Profile + Contact + Nav + Footer
-// ══════════════════════════════════════════
-async function loadAbout() {
+// ── Detect current page ──────────────────────────────────────
+const _raw = window.location.pathname.split("/").pop();
+const PAGE = !_raw ? "index.html" : _raw.includes(".") ? _raw : _raw + ".html";
+
+// ════════════════════════════════════════════════════════════
+//  HOME PAGE — index.html
+//  Fetches: /api/about
+// ════════════════════════════════════════════════════════════
+async function loadHome() {
   try {
     const d = await apiFetch("/api/about");
 
-    // Nav logo + page title
-    setHTML("navLogo", `${d.name.split(" ")[0]}<span class="dot">.</span>`);
+    // Hero name — Hello I'm + jina
+    setHTML("heroName",
+      `${d.name.split(" ")[0]} ${d.name.split(" ")[1]}<br/>
+       <span class="accent">${d.name.split(" ").slice(2).join(" ")}</span>`
+    );
+    setEl("heroRole",   d.title);
+    setEl("heroBio",    d.bio);
+    setEl("footerName", d.name);
     document.title = `${d.name} · Portfolio`;
 
-    // Hero
-    setHTML("heroName", `${d.name.split(" ")[0]} ${d.name.split(" ")[1]}<br/><span class="accent">${d.name.split(" ").slice(2).join(" ")}</span>`);
-    setEl("heroRole", d.title);
-    setEl("heroBio", d.bio);
+  } catch (err) {
+    console.error("loadHome failed:", err);
+    setEl("heroName", "Rashid Busazi");
+  }
+}
 
-    // Profile photo
+// ════════════════════════════════════════════════════════════
+//  PROFILE PAGE — profile.html
+//  Fetches: /api/about
+// ════════════════════════════════════════════════════════════
+async function loadProfile() {
+  try {
+    const d = await apiFetch("/api/about");
+
     setAttr("profilePhoto", "src", `${API_BASE}${d.photo}`);
 
-    // Profile badge
-    setHTML("profileBadge", d.available ? `<span class="badge-open">● Open to Work</span>` : `<span class="badge-closed">● Not Available</span>`);
+    setHTML("profileBadge",
+      d.available
+        ? `<span class="badge-open">● Open to Work</span>`
+        : `<span class="badge-closed">● Not Available</span>`
+    );
 
-    // Profile name & title
-    setEl("profileName", d.name);
+    setEl("profileName",  d.name);
     setEl("profileTitle", d.title);
+    setEl("profileBio",   d.bio);
 
-    // Profile details
     setHTML("profileDetails", `
       <div class="info-row"><span>📍</span><span>${d.location}</span></div>
       <div class="info-row"><span>📧</span><span>${d.email}</span></div>
       <div class="info-row"><span>📱</span><span>${d.phone}</span></div>
+      <div class="info-row"><span>🎓</span><span>Eastern Africa Statistical Training Center</span></div>
     `);
 
-    // Profile bio
-    setEl("profileBio", d.bio);
-
-    // Profile social links
     setHTML("profileLinks", `
       <a href="${d.github}"   class="btn btn-outline btn-sm" target="_blank" rel="noopener">💻 GitHub</a>
       <a href="${d.linkedin}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">🔗 LinkedIn</a>
+      <a href="https://wa.me/${d.phone.replace(/\D/g,'')}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">💬 WhatsApp</a>
     `);
-
-    // Contact info
-    setEl("contactTagline", d.available
-      ? "I'm currently open to new opportunities. Feel free to reach out!"
-      : "I'm busy but feel free to reach out for future opportunities.");
-
-    setHTML("contactItems", `
-      <div class="contact-item"><span>📧</span><a href="mailto:${d.email}">${d.email}</a></div>
-      <div class="contact-item"><span>📱</span><span>${d.phone}</span></div>
-      <div class="contact-item"><span>🔗</span><a href="${d.linkedin}" target="_blank" rel="noopener">${d.linkedin.replace("https://","")}</a></div>
-      <div class="contact-item"><span>💻</span><a href="${d.github}"   target="_blank" rel="noopener">${d.github.replace("https://","")}</a></div>
-    `);
-
-    // Footer
-    setEl("footerName", d.name);
 
   } catch (err) {
-    console.error("loadAbout failed:", err);
-    setEl("heroName", "Portfolio");
-    setEl("contactTagline", "⚠️ Could not load info.");
-    setHTML("contactItems", `<div class="contact-error">⚠️ Backend unreachable.</div>`);
+    console.error("loadProfile failed:", err);
+    setEl("profileName", "⚠️ Could not load profile.");
   }
 }
 
-// ══════════════════════════════════════════
-//  2. LOAD SKILLS
-// ══════════════════════════════════════════
+// ════════════════════════════════════════════════════════════
+//  SKILLS PAGE — skills.html
+//  Fetches: /api/skills
+// ════════════════════════════════════════════════════════════
 async function loadSkills() {
   const grid = document.getElementById("skillsGrid");
   const bars = document.getElementById("skillBars");
+  if (!grid) return;
 
   try {
     const d = await apiFetch("/api/skills");
@@ -159,20 +140,22 @@ async function loadSkills() {
       const pct = SKILL_LEVELS[skill] ?? 60;
       return `
         <div class="skill-bar-item">
-          <div class="skill-bar-label"><span>${skill}</span><span>${pct}%</span></div>
+          <div class="skill-bar-label">
+            <span>${skill}</span><span>${pct}%</span>
+          </div>
           <div class="skill-bar-track">
             <div class="skill-bar-fill" style="--w:${pct}%"></div>
           </div>
         </div>`;
     }).join("");
 
-    // Animate bars when visible
+    // Animate bars
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting)
           e.target.style.animationPlayState = "running";
       });
-    }, { threshold:0.4 });
+    }, { threshold:0.3 });
 
     document.querySelectorAll(".skill-bar-fill").forEach(b => observer.observe(b));
 
@@ -182,13 +165,17 @@ async function loadSkills() {
   }
 }
 
-// ══════════════════════════════════════════
-//  3. LOAD PROJECTS
-// ══════════════════════════════════════════
+// ════════════════════════════════════════════════════════════
+//  PROJECTS PAGE — projects.html
+//  Fetches: /api/projects
+// ════════════════════════════════════════════════════════════
 async function loadProjects() {
   const grid = document.getElementById("projectsGrid");
+  if (!grid) return;
+
   try {
     const projects = await apiFetch("/api/projects");
+
     grid.innerHTML = projects.map(p => `
       <div class="project-card">
         <div class="project-img">
@@ -207,27 +194,53 @@ async function loadProjects() {
         </div>
       </div>
     `).join("");
+
   } catch (err) {
     console.error("loadProjects failed:", err);
     grid.innerHTML = `<p class="contact-error">⚠️ Could not load projects.</p>`;
   }
 }
 
-// ══════════════════════════════════════════
-//  4. CONTACT FORM
-// ══════════════════════════════════════════
+// ════════════════════════════════════════════════════════════
+//  CONTACT PAGE — contact.html
+//  Fetches: /api/about  +  POST /api/contact
+// ════════════════════════════════════════════════════════════
+async function loadContact() {
+  try {
+    const d = await apiFetch("/api/about");
+
+    setEl("contactTagline",
+      d.available
+        ? "I'm currently open to new opportunities. Feel free to reach out!"
+        : "I'm busy but feel free to reach out for future opportunities."
+    );
+
+    setHTML("contactItems", `
+      <div class="contact-item"><span>📧</span><a href="mailto:${d.email}">${d.email}</a></div>
+      <div class="contact-item"><span>📱</span><span>${d.phone}</span></div>
+      <div class="contact-item"><span>💬</span><a href="https://wa.me/${d.phone.replace(/\D/g,'')}" target="_blank" rel="noopener">WhatsApp</a></div>
+      <div class="contact-item"><span>🔗</span><a href="${d.linkedin}" target="_blank" rel="noopener">${d.linkedin.replace("https://","")}</a></div>
+      <div class="contact-item"><span>💻</span><a href="${d.github}"   target="_blank" rel="noopener">${d.github.replace("https://","")}</a></div>
+    `);
+
+  } catch (err) {
+    console.error("loadContact failed:", err);
+    setEl("contactTagline", "⚠️ Could not load contact info.");
+  }
+}
+
+// Contact form submit
 const form = document.getElementById("contactForm");
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const submitBtn  = document.getElementById("submitBtn");
     const formStatus = document.getElementById("formStatus");
-
     const name    = document.getElementById("name").value.trim();
     const email   = document.getElementById("email").value.trim();
     const message = document.getElementById("message").value.trim();
 
-    submitBtn.disabled = true;
+    submitBtn.disabled    = true;
     submitBtn.textContent = "Sending...";
     formStatus.textContent = "";
     formStatus.className   = "form-status";
@@ -257,7 +270,11 @@ if (form) {
   });
 }
 
-// ══════════════════════════════════════════
-//  BOOT — load everything in parallel
-// ══════════════════════════════════════════
-Promise.all([loadAbout(), loadSkills(), loadProjects()]);
+// ════════════════════════════════════════════════════════════
+//  BOOT — load page specific data
+// ════════════════════════════════════════════════════════════
+if      (PAGE === "index.html"    || PAGE === "") loadHome();
+else if (PAGE === "profile.html"  )               loadProfile();
+else if (PAGE === "skills.html"   )               loadSkills();
+else if (PAGE === "projects.html" )               loadProjects();
+else if (PAGE === "contact.html"  )               loadContact();
